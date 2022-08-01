@@ -112,5 +112,5 @@ def location_main():
             print("Choose from given option only!!")
             continue
 
-location_main()
+# location_main()
 

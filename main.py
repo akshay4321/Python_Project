@@ -1,5 +1,10 @@
 import sqlite3
 import pandas as panda
+import database as db
+import location as l
+import package as p
+
+
 
 crypto_password = ""
 file_contact = panda.read_excel("en_dn/chyper-code.xlsx")
@@ -25,7 +30,10 @@ error_entry = True
 admin_error_entry = True
 validate = "False"
 
-connection = sqlite3.connect("rackDB.db")
+if __name__ == '__main__':
+    con=db.database_creation(r"Data\rackDB.db")
+
+connection = sqlite3.connect(r"Data\rackDB.db")
 cursor = connection.cursor()
 
 while error_entry:
@@ -120,11 +128,13 @@ while error_entry:
                                 admin_error_entry = "true"
 
                             if adminoption == 1:
-                                print("Location Task")
+                                l.location_main()
+                                # print("Location Task")
                             elif adminoption == 2:
                                 print("Hotel Task")
                             elif adminoption == 3:
-                                print("Package Task")
+                                p.package_main()
+                                # print("Package Task")
                             else:
                                 break
                     else:
