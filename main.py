@@ -22,12 +22,21 @@ def adminmenu():
     print('1) Location')
     print('2) Hotel')
     print('3) Package')
-    print('4) Exit')
+    print('4) Home')
+
+def usermenu():
+    print('1) View Packages')
+    print('2) View Hotel')
+    print('3) Specific Requirements Package')
+    print('4) My Bookings')
+    print('5) Home')
+
 
 
 error_entry = True
-
 admin_error_entry = True
+user_error_entry = True
+
 validate = "False"
 
 if __name__ == '__main__':
@@ -140,6 +149,31 @@ while error_entry:
                     else:
                         print("******************************")
                         print("Welcome,Customer " + cur_result[1] + "\n")
+
+                        while user_error_entry:
+
+                            usermenu()
+
+                            try:
+                                useroption = int(input("Enter Your Option To perform Customer Task:- "))
+                            except ValueError:
+                                continue
+                            else:
+                                user_error_entry = "true"
+
+                            if useroption == 1:
+
+                                 print("View Package")
+                            elif useroption == 2:
+                                print("View Hotel")
+                            elif useroption == 3:
+
+                                print("Specific Requirments")
+                            elif useroption == 4:
+
+                                print("My Bookings")
+                            else:
+                                break
 
                     crypto_password = ""
                     break;
