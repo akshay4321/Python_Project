@@ -5,7 +5,7 @@ def database_creation(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+        # print(sqlite3.version)
 
         cur = conn.cursor()
         cur.execute(
@@ -43,4 +43,5 @@ def select_table(db_file,table_nm):
     finally:
         if conn:
             conn.close()
+
 

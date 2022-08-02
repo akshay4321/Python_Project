@@ -3,7 +3,10 @@ import pandas as panda
 import database as db
 import location as l
 import package as p
-
+import specific_requirenment as s
+import booking_admin as b
+import hotel as h
+import customer as c
 
 
 crypto_password = ""
@@ -22,7 +25,10 @@ def adminmenu():
     print('1) Location')
     print('2) Hotel')
     print('3) Package')
-    print('4) Home')
+    print('4) Specific Requirements List')
+    print('5) Manage Customer')
+    print('6) Booking Details')
+    print('7) Home')
 
 def usermenu():
     print('1) View Packages')
@@ -140,10 +146,16 @@ while error_entry:
                                 l.location_main()
                                 # print("Location Task")
                             elif adminoption == 2:
-                                print("Hotel Task")
+                                h.hotel_main()
                             elif adminoption == 3:
                                 p.package_main()
                                 # print("Package Task")
+                            elif adminoption == 4:
+                                s.display_specific_requirenment(r"Data\rackDB.db")
+                            elif adminoption == 5:
+                                c.Customer_main()
+                            elif adminoption == 6:
+                                b.booking_list_admin(r"Data\rackDB.db")
                             else:
                                 break
                     else:
@@ -167,7 +179,7 @@ while error_entry:
                             elif useroption == 2:
                                 print("View Hotel")
                             elif useroption == 3:
-
+                                s.insert_specific_requirenment(r"Data\rackDB.db",cur_result[0])
                                 print("Specific Requirments")
                             elif useroption == 4:
 
