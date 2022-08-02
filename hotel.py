@@ -8,7 +8,6 @@ def insert_hotel(db_file):
     location_id_exists=False
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
         cur = conn.cursor()
         result = db.select_table(r"Data\rackDB.db", "Location")
         print("------------------------------------------------------------------------------------------")
@@ -43,7 +42,6 @@ def update_hotel(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
         cur = conn.cursor()
         result = db.select_table(r"Data\rackDB.db", "Hotel")
         print("------------------------------------------------------------------------------------------")
@@ -93,7 +91,6 @@ def delete_hotel(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
         cur = conn.cursor()
         hotel_id=input("Enter Hotel ID which you want to delete:-")
         update_Date = datetime.now()
@@ -122,9 +119,9 @@ def hotel_main():
             print("------------------------------------------------------------------------------------------")
             for row in result:
                 print(row[0],"\t\t\t",row[2],"\t\t\t",row[3],"\t\t",row[4],"\t", row[6],"\t",row[5])
-            print("*****************************************************")
+            print("******************************************************************************************")
             print("1. Insert \n2. Update \n3. Delete \n4. Home")
-            print("*****************************************************")
+            print("******************************************************************************************")
             choice=int(input("Enter your choice"))
             if choice==1:
                 insert_hotel(r"Data\rackDB.db")
