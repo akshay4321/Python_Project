@@ -94,7 +94,7 @@ def package_main(customer_id):
             print("******** Package List ********")
             result=db.package_data(r"Data\rackDB.db","Package")
             print("------------------------------------------------------------------------------------------")
-            print("Package_Id \t City Name \t\t Package Name \t Description \t\t Price  ")
+            print("Package Id \t Location Name \t\t Package Name \t Description \t\t Price  ")
             print("------------------------------------------------------------------------------------------")
             for row in result:
                 print(row[0], "\t\t\t", row[1], "\t\t", row[2],"\t\t", row[3], "\t", row[4])

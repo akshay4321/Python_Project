@@ -7,7 +7,7 @@ def insert_location(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+
         cur = conn.cursor()
         location_name=input("Enter location name:- ")
         province=input("Enter province name:- ")
@@ -28,7 +28,7 @@ def update_location(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+
         cur = conn.cursor()
         locationid=input("Enter location ID which you want to update:-")
         location_name = input("Enter location name:- ")
@@ -58,7 +58,7 @@ def delete_location(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+
         cur = conn.cursor()
         locationid=input("Enter location ID which you want to update:-")
         update_Date = datetime.now()
@@ -91,7 +91,7 @@ def location_main():
             print("*****************************************************")
             print("1. Insert \n2. Update \n3. Delete \n4. Home")
             print("*****************************************************")
-            choice=int(input("Enter your choice"))
+            choice=int(input("Enter your choice:- "))
             if choice==1:
                 insert_location(r"Data\rackDB.db")
             elif choice==2:

@@ -76,4 +76,20 @@ def package_data(db_file,table_nm):
         if conn:
             conn.close()
 
+def hotel_data(db_file,table_nm):
+    """ Display Table """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+
+        cur = conn.cursor()
+        cur.execute("select hotel_id,location_name,hotel_name,description,price from Hotel h LEFT JOIN Location l ON l.location_id = h.hotel_id where h.delete_status=0")
+        conn.commit()
+        return cur.fetchall()
+    except Error as e:
+        print(e)
+    finally:
+        if conn:
+            conn.close()
+
 

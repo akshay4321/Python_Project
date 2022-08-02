@@ -7,11 +7,10 @@ def insert_hotel(db_file, customer_id):
     conn = None
     hotel_id_exists=False
     #package_id_exists = False
-    total_amount=0
-    hst = 0
+
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+
         cur = conn.cursor()
         result = db.select_table(r"Data\rackDB.db", "Hotel")
         print("------------------------------------------------------------------------------------------")
@@ -20,22 +19,35 @@ def insert_hotel(db_file, customer_id):
         for row in result:
             print(row[0], "\t\t\t", row[2], "\t\t", row[3], "\t", row[4])
         hotel_id=int(input("Enter Hotel_id from above Hotel:- "))
-        for row in result:
-            if row[0]== hotel_id:
-                hotel_id_exists=True
-                break
 
+        result_hotel_id = cur.execute("SELECT * FROM Hotel WHERE hotel_id=" + str(hotel_id))
+        hotel = result_hotel_id.fetchone()
 
-        if hotel_id_exists:
+        if hotel:
             from_date=input("Enter from date (must be in YYYY-MM-DD):- ")
             from_datetime = datetime.strptime(from_date, '%Y-%m-%d')
             to_date = input("Enter to date (must be in YYYY-MM-DD):- ")
             to_datetime = datetime.strptime(to_date, '%Y-%m-%d')
             create_updateDate = datetime.now()
             delete_status=0
+            hotel_amout = hotel[4]
+
+            from datetime import date
+            dt1 = to_date.split("-")
+            dt2 = from_date.split("-")
+
+            total_days = date(int(dt1[0]), int(dt1[1]), int(dt1[2])) - date(int(dt2[0]), int(dt2[1]), int(dt2[2]))
+
+            total_days = total_days.days
+            total_hotel_amount_daywise = total_days * hotel_amout
+            hst = (total_hotel_amount_daywise * (13 / 100))
+            total_amount = total_hotel_amount_daywise + hst
+
             cur.execute("INSERT INTO Booking(hotel_id,customer_id,from_date,to_date,total_amount,createdate_time,update_datetime,delete_status) values(?,?,?,?,?,?,?,?)",(hotel_id,customer_id,from_datetime,to_datetime,total_amount,create_updateDate,create_updateDate,delete_status))
             conn.commit()
             print("booking is done successfully....")
+        else:
+            print("Hotel does not exist!!!")
     except Error as e:
         print(e)
     finally:
@@ -68,8 +80,17 @@ def package_main(customer_id):
     while repeate != False:
         try:
             #booking_view(r"Data\rackDB.db",customer_id)
+
+            print("******** Hotel List ********")
+            result = db.hotel_data(r"Data\rackDB.db", "Hotel")
+            print("------------------------------------------------------------------------------------------")
+            print("Hotel Id \t Location Name \t\t Hotel Name \t Description \t\t Price  ")
+            print("------------------------------------------------------------------------------------------")
+            for row in result:
+                print(row[0], "\t\t\t", row[1], "\t\t", row[2], "\t\t", row[3], "\t", row[4])
+
             print("*****************************************************")
-            print("1. Book Hotel \n4. Home")
+            print("1. Book Hotel \n2. Home")
             print("*****************************************************")
             choice=int(input("Enter your choice:- "))
             if choice==1:
@@ -88,5 +109,5 @@ def package_main(customer_id):
             print("Choose from given option only!!")
             continue
 
-package_main(3)
+# package_main(3)
 

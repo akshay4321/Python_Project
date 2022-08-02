@@ -122,7 +122,7 @@ def hotel_main():
             print("******************************************************************************************")
             print("1. Insert \n2. Update \n3. Delete \n4. Home")
             print("******************************************************************************************")
-            choice=int(input("Enter your choice"))
+            choice=int(input("Enter your choice:- "))
             if choice==1:
                 insert_hotel(r"Data\rackDB.db")
             elif choice==2:
