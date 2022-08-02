@@ -161,7 +161,9 @@ while error_entry:
                                 break
                     else:
                         print("******************************")
-                        print("Welcome,Customer " + cur_result[1] + "\n")
+                        print("Welcome To User Panel")
+                        print("******************************")
+                        print("Welcome, " + cur_result[1] + "\n")
 
                         while user_error_entry:
 

@@ -18,7 +18,7 @@ def insert_hotel(db_file, customer_id):
         print("------------------------------------------------------------------------------------------")
         for row in result:
             print(row[0], "\t\t\t", row[2], "\t\t", row[3], "\t", row[4])
-        hotel_id=int(input("Enter Hotel_id from above Hotel:- "))
+        hotel_id=int(input("Enter Hotel_id from above Hotel List:- "))
 
         result_hotel_id = cur.execute("SELECT * FROM Hotel WHERE hotel_id=" + str(hotel_id))
         hotel = result_hotel_id.fetchone()
@@ -45,7 +45,9 @@ def insert_hotel(db_file, customer_id):
 
             cur.execute("INSERT INTO Booking(hotel_id,customer_id,from_date,to_date,total_amount,createdate_time,update_datetime,delete_status) values(?,?,?,?,?,?,?,?)",(hotel_id,customer_id,from_datetime,to_datetime,total_amount,create_updateDate,create_updateDate,delete_status))
             conn.commit()
-            print("booking is done successfully....")
+            print("**************************************")
+            print("Hotel Booking is Done successfully....")
+            print("**************************************")
         else:
             print("Hotel does not exist!!!")
     except Error as e:

@@ -14,7 +14,7 @@ def update_customer(db_file):
     try:
         conn = sqlite3.connect(db_file)
         cur = conn.cursor()
-        result = db.select_table(r"Data\rackDB.db", "Customer")
+        result = db.customer_data_only(r"Data\rackDB.db", "Customer")
         print("------------------------------------------------------------------------------------------")
         print("Customer_Id \t\t Name \t\t\t Email ID \t\t\t\t Password")
         print("------------------------------------------------------------------------------------------")

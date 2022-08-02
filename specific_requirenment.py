@@ -20,9 +20,9 @@ def insert_specific_requirenment(db_file,customer_id):
             "INSERT INTO Specific_requirement_request(customer_id,description,request_status,createdate_time,update_datetime,delete_status) values(?,?,?,?,?,?)",
             (customer_id, description, request_status, create_updateDate, create_updateDate, delete_status))
         conn.commit()
-        print("******************************")
-        print("Data inserted successfully....")
-        print("******************************")
+        print("***********************************************")
+        print("Specific Requirements inserted successfully....")
+        print("***********************************************")
     except Error as e:
         print(e)
     finally:
