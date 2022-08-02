@@ -33,7 +33,7 @@ def display_specific_requirenment(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+
         cur = conn.cursor()
         cur.execute("SELECT require_request_id,name,description FROM Specific_requirement_request s JOIN Customer c ON s.customer_id = c.customer_id where s.delete_status=0")
         conn.commit()

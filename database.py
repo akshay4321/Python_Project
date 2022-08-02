@@ -5,7 +5,6 @@ def database_creation(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        # print(sqlite3.version)
 
         cur = conn.cursor()
         cur.execute(
@@ -33,7 +32,7 @@ def select_table(db_file,table_nm):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+
         cur = conn.cursor()
         cur.execute("select * from "+table_nm+" where delete_status=0")
         conn.commit()
@@ -49,10 +48,26 @@ def customer_data_only(db_file,table_nm):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+
         cur = conn.cursor()
         # cur.execute("select * from "+table_nm+" where delete_status=0")
         cur.execute("SELECT * FROM (SELECT * FROM "+table_nm+") WHERE customer_id > 1")
+        conn.commit()
+        return cur.fetchall()
+    except Error as e:
+        print(e)
+    finally:
+        if conn:
+            conn.close()
+
+def package_data(db_file,table_nm):
+    """ Display Table """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+
+        cur = conn.cursor()
+        cur.execute("select package_id,location_name,package_name,description,price from Package p LEFT JOIN Location l ON l.location_id = p.package_id where p.delete_status=0")
         conn.commit()
         return cur.fetchall()
     except Error as e:

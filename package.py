@@ -8,7 +8,7 @@ def insert_package(db_file):
     location_id_exists=False
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+
         cur = conn.cursor()
         result = db.select_table(r"Data\rackDB.db", "Location")
         print("------------------------------------------------------------------------------------------")
@@ -43,7 +43,7 @@ def update_package(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+
         cur = conn.cursor()
         result = db.select_table(r"Data\rackDB.db", "Package")
         print("------------------------------------------------------------------------------------------")
@@ -92,7 +92,7 @@ def delete_package(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
+
         cur = conn.cursor()
         package_id=input("Enter Package ID which you want to delete:-")
         update_Date = datetime.now()

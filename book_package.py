@@ -55,7 +55,9 @@ def insert_package(db_file, customer_id):
                 (hotel_id, package_id, customer_id, from_datetime, to_datetime, total_amount, create_updateDate,
                  create_updateDate, delete_status))
             conn.commit()
-            print("Data inserted successfully....")
+            print("******************************")
+            print("Booking Completed Successfully....")
+            print("******************************")
         else:
             print("Package does not exist!!!")
     except Error as e:
@@ -87,7 +89,16 @@ def package_main(customer_id):
     repeate= True
     while repeate != False:
         try:
-            booking_view(r"Data\rackDB.db",customer_id)
+            # booking_view(r"Data\rackDB.db",customer_id)
+
+            print("******** Package List ********")
+            result=db.package_data(r"Data\rackDB.db","Package")
+            print("------------------------------------------------------------------------------------------")
+            print("Package_Id \t City Name \t\t Package Name \t Description \t\t Price  ")
+            print("------------------------------------------------------------------------------------------")
+            for row in result:
+                print(row[0], "\t\t\t", row[1], "\t\t", row[2],"\t\t", row[3], "\t", row[4])
+
             print("*****************************************************************************************************************")
             print("1. Book Packages \n2. Home")
             print("*****************************************************************************************************************")
@@ -108,5 +119,5 @@ def package_main(customer_id):
             print("Choose from given option only!!")
             continue
 
-package_main(3)
+# package_main(3)
 

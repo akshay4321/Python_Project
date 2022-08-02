@@ -7,7 +7,7 @@ import specific_requirenment as s
 import booking_admin as b
 import hotel as h
 import customer as c
-
+import book_package as book
 
 crypto_password = ""
 file_contact = panda.read_excel("en_dn/chyper-code.xlsx")
@@ -174,8 +174,8 @@ while error_entry:
                                 user_error_entry = "true"
 
                             if useroption == 1:
-
-                                 print("View Package")
+                                # print(cur_result[0])
+                                book.package_main(cur_result[0])
                             elif useroption == 2:
                                 print("View Hotel")
                             elif useroption == 3:
