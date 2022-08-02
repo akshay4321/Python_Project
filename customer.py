@@ -2,6 +2,11 @@ import sqlite3
 from sqlite3 import Error
 from datetime import datetime
 import database as db
+import pandas as panda
+
+crypto_password1 = ""
+file_contact = panda.read_excel("en_dn/chyper-code.xlsx")
+data = file_contact.values.tolist()
 
 def update_customer(db_file):
     """ create a database connection to a SQLite database """
@@ -19,7 +24,14 @@ def update_customer(db_file):
         Customer_Id=input("Enter Customer Id:- ")
         name = input("Enter Customer name:- ")
         email_id = input("Enter Customer Email ID:- ")
-        password_text = input("Enter your password:-")
+        password = input("Enter your password:-")
+
+        password = password.upper()
+        crypto_password1 = ""
+        for i in password:
+            for sheet_cryp_data in data:
+                if i == str(sheet_cryp_data[0]):
+                    crypto_password1 = crypto_password1 + str(sheet_cryp_data[1])
 
         Update_Date_Time = datetime.now()
         cur.execute("select * from Customer where Customer_Id=" + Customer_Id)
@@ -27,10 +39,11 @@ def update_customer(db_file):
         print(len(results))
         if len(results) > 0:
                 cur.execute(
-                    "UPDATE Customer SET Customer_Id=?,name=?,email_id=?,password_text=?,Update_Date_Time=? WHERE Customer_Id=?",
-                    (Customer_Id, name, email_id,password_text,Update_Date_Time,Customer_Id))
+                    "UPDATE Customer SET Customer_Id=?,name=?,email_id=?,password=?,password_text=?,Update_Date_Time=? WHERE Customer_Id=?",
+                    (Customer_Id, name, email_id,crypto_password1,password,Update_Date_Time,Customer_Id))
                 conn.commit()
                 print("Customer data updated successfully....")
+                crypto_password1 = ""
     except Error as e:
         print(e)
     finally:
@@ -65,12 +78,12 @@ def Customer_main():
     repeate= True
     while repeate != False:
         try:
-            result= db.select_table(r"Data\rackDB.db","Customer")
+            result= db.customer_data_only(r"Data\rackDB.db","Customer")
             print("------------------------------------------------------------------------------------------")
-            print("Customer_Id \t\t Name \t\t\t Email ID \t\t\t\t Password")
+            print("Customer_Id \t\t Name \t\t\t\t Email ID \t\t\t\t Password")
             print("------------------------------------------------------------------------------------------")
             for row in result:
-                print(row[0],"\t\t\t\t\t",row[1],"\t\t\t",row[2],"\t\t",row[3])
+                print(row[0],"\t\t\t\t\t",row[1],"\t\t\t\t",row[2],"\t\t\t",row[3])
             print("******************************************************************************************")
             print("1. Update \n2. Delete \n3. Home ")
             print("******************************************************************************************")

@@ -44,4 +44,21 @@ def select_table(db_file,table_nm):
         if conn:
             conn.close()
 
+def customer_data_only(db_file,table_nm):
+    """ Display Table """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+        print(sqlite3.version)
+        cur = conn.cursor()
+        # cur.execute("select * from "+table_nm+" where delete_status=0")
+        cur.execute("SELECT * FROM (SELECT * FROM "+table_nm+") WHERE customer_id > 1")
+        conn.commit()
+        return cur.fetchall()
+    except Error as e:
+        print(e)
+    finally:
+        if conn:
+            conn.close()
+
 
