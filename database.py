@@ -48,10 +48,9 @@ def customer_data_only(db_file,table_nm):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-
         cur = conn.cursor()
         # cur.execute("select * from "+table_nm+" where delete_status=0")
-        cur.execute("SELECT * FROM (SELECT * FROM "+table_nm+") WHERE customer_id > 1")
+        cur.execute("SELECT * FROM  "+table_nm+" WHERE customer_id > 1 AND Delete_Status=0")
         conn.commit()
         return cur.fetchall()
     except Error as e:

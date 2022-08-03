@@ -46,12 +46,13 @@ def update_package(db_file):
 
         cur = conn.cursor()
         result = db.select_table(r"Data\rackDB.db", "Package")
+
         print("------------------------------------------------------------------------------------------")
         print("Package_Id \t Name \t Price \t Package Type \t Total_number_package ")
         print("------------------------------------------------------------------------------------------")
         for row in result:
             print(row[0],"\t\t\t",row[2],"\t\t",row[4],"\t", row[6],"\t",row[5])
-        package_id=int("Enter package ID:- ")
+        package_id=input("Enter package ID:- ")
         result = db.select_table(r"Data\rackDB.db", "Location")
         print("------------------------------------------------------------------------------------------")
         print("Location_Id \t Name \t Province \t Country \t Postal Code ")
@@ -128,6 +129,7 @@ def package_main():
             if choice==1:
                 insert_package(r"Data\rackDB.db")
             elif choice==2:
+                print("2")
                 update_package(r"Data\rackDB.db")
             elif choice==3:
                 delete_package(r"Data\rackDB.db")
