@@ -9,6 +9,7 @@ import hotel as h
 import customer as c
 import book_package as book
 import book_hoel as b_hotel
+import report as r
 
 crypto_password = ""
 file_contact = panda.read_excel("en_dn/chyper-code.xlsx")
@@ -29,7 +30,8 @@ def adminmenu():
     print('4) Specific Requirements List')
     print('5) Manage Customer')
     print('6) Booking Details')
-    print('7) Home')
+    print('7) Reports')
+    print('8) Home')
 
 def usermenu():
     print('1) View Packages')
@@ -157,6 +159,8 @@ while error_entry:
                                 c.Customer_main()
                             elif adminoption == 6:
                                 b.booking_list_admin(r"Data\rackDB.db")
+                            elif adminoption == 7:
+                                r.main_reports()
                             else:
                                 break
                     else:
